@@ -27,7 +27,7 @@ const material = new THREE.MeshBasicMaterial({color: 0x0000ff, wireframe: true})
 for (let i = -4; i < 5; i++) {
   const m = new THREE.Mesh(new THREE.BoxGeometry(10, 10, 10), i%2 === 0? material : material0);
   m.position.x = i*20;
-  m.position.y = 40;
+  m.position.y = 20;
   m.position.z = 0;
   m.name = i;
   scene.add(m);
