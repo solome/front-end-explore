@@ -8,7 +8,9 @@
   "scripts": {
     "dev": "npx webpack-dev-server"
   },
-  "dependencies": {},
+  "dependencies": {
+    "three": "^0.102.1"
+  },
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",
     "glob": "^7.1.3",
