@@ -6,7 +6,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const resolve = path.resolve
 
 const srcPath = resolve(__dirname, 'src')
-const outputPath = resolve(__dirname, 'dist')
+const outputPath = resolve(__dirname, 'webgl')
 
 const accessible = (f) => {
   try {
@@ -46,8 +46,9 @@ module.exports = {
   resolve: { extensions: [ '.ts', '.tsx', '.js', '.jsx' ] },
   devtool: 'source-map',
   module: {
-    rules: [{ test: /\.tsx?$/, loader: 'awesome-typescript-loader' }],
+    rules: [{ test: /\.tsx?$/, loader: 'ts-loader' }],
   },
   plugins: htmls,
+  mode: process.env.NODE_ENV ||'development',
 }
 

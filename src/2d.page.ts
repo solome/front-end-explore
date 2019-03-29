@@ -1,6 +1,6 @@
 const canvas = document.createElement('canvas')
-canvas.width=500
-canvas.height=500
+canvas.width=400
+canvas.height=400
 
 document.body.appendChild(canvas)
 

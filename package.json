@@ -6,16 +6,17 @@
   "author": "solome",
   "license": "MIT",
   "scripts": {
-    "dev": "npx webpack-dev-server"
+    "dev": "npx webpack-dev-server",
+    "build": "NODE_ENV=production webpack"
   },
   "dependencies": {
     "three": "^0.102.1"
   },
   "devDependencies": {
-    "awesome-typescript-loader": "^5.2.1",
     "glob": "^7.1.3",
     "html-webpack-plugin": "^4.0.0-beta.5",
     "source-map-loader": "^0.2.4",
+    "ts-loader": "^5.3.3",
     "typescript": "^3.3.3333",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.2.3",
