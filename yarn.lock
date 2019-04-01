@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@types/dat.gui@^0.7.2":
+  version "0.7.2"
+  resolved "http://registry.npmjs.lianjia.com:7001/@types/dat.gui/download/@types/dat.gui-0.7.2.tgz#f6964d39504e97533774954e3dcf7a9f669196e8"
+  integrity sha1-9pZNOVBOl1M3dJVOPc96n2aRlug=
+
 "@webassemblyjs/ast@1.8.5":
   version "1.8.5"
   resolved "http://registry.npmjs.lianjia.com:7001/@webassemblyjs/ast/download/@webassemblyjs/ast-1.8.5.tgz#51b1c5fe6576a34953bf4b253df9f0d490d9e359"
@@ -881,6 +886,11 @@ cyclist@~0.2.2:
   version "0.2.2"
   resolved "http://registry.npmjs.lianjia.com:7001/cyclist/download/cyclist-0.2.2.tgz#1b33792e11e914a2fd6d6ed6447464444e5fa640"
   integrity sha1-GzN5LhHpFKL9bW7WRHRkRE5fpkA=
+
+dat.gui@^0.7.6:
+  version "0.7.6"
+  resolved "http://registry.npmjs.lianjia.com:7001/dat.gui/download/dat.gui-0.7.6.tgz#92182a0f2dc96c26910f888238d3839166d82f76"
+  integrity sha1-khgqDy3JbCaRD4iCONODkWbYL3Y=
 
 date-now@^0.1.4:
   version "0.1.4"

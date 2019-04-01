@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import { orbitControls } from './controls/OrbitControls'
+import * as dat from 'dat.gui'
 
 const __global__: any = window as any
 __global__.THREE = __global__.THREE || THREE
@@ -62,22 +63,27 @@ camera.position.x = -30
 camera.position.y = 40
 camera.position.z = 30
 camera.lookAt(scene.position)
+interface Controls {
+  rotationSpeed: number
+  bouncingSpeed: number
+}
+const controls: Controls = { rotationSpeed: 0.02, bouncingSpeed: 0.04 }
+const datGUI = new dat.GUI()
+datGUI.add(controls, 'rotationSpeed', 0, 0.5)
+datGUI.add(controls, 'bouncingSpeed', 0, 0.5)
 
-let step = 0
 const renderScene = () => {
+  box.rotation.x += controls.rotationSpeed
+  box.rotation.y += controls.rotationSpeed
+  box.rotation.z += controls.rotationSpeed
 
-  box.rotation.x += .02
-  box.rotation.y += .02
-  box.rotation.z += .02
-
-  step += .04
-  sphere.position.x = 20 + (10*(Math.cos(step)))
-  sphere.position.y = 2 + (10*Math.abs(Math.sin(step)))
+  controls.bouncingSpeed += .04
+  sphere.position.x = 20 + (10*(Math.cos(controls.bouncingSpeed)))
+  sphere.position.y = 2 + (10*Math.abs(Math.sin(controls.bouncingSpeed)))
 
   requestAnimationFrame(renderScene)
   renderer.render(scene, camera)
 }
 
 renderScene()
-
 orbitControls(camera, document.body, renderer, scene)
