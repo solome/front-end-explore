@@ -42,7 +42,6 @@ const material2: THREE.MeshBasicMaterial = new THREE.MeshBasicMaterial({color: 0
 
 let renderOrder = 99
 const meshConfig = (m: THREE.Mesh) => {
-  // m.material.depthTest = false
   m.renderOrder = renderOrder++
   scene.add(m)
 }
@@ -75,3 +74,4 @@ meshDefault.position.y = -10
 scene.add(meshDefault)
 
 orbitControls(camera, document.body, renderer, scene)
+

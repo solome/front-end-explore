@@ -51,3 +51,4 @@ module.exports = {
   plugins: htmls,
   mode: process.env.NODE_ENV ||'development',
 }
+

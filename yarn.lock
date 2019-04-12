@@ -3711,10 +3711,10 @@ typedarray@^0.0.6:
   resolved "http://registry.npmjs.lianjia.com:7001/typedarray/download/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
-typescript@^3.3.3333:
-  version "3.3.3333"
-  resolved "http://registry.npmjs.lianjia.com:7001/typescript/download/typescript-3.3.3333.tgz#171b2c5af66c59e9431199117a3bcadc66fdcfd6"
-  integrity sha1-FxssWvZsWelDEZkRejvK3Gb9z9Y=
+typescript@^3.4.3:
+  version "3.4.3"
+  resolved "http://registry.npmjs.lianjia.com:7001/typescript/download/typescript-3.4.3.tgz#0eb320e4ace9b10eadf5bc6103286b0f8b7c224f"
+  integrity sha1-DrMg5KzpsQ6t9bxhAyhrD4t8Ik8=
 
 uglify-js@3.4.x:
   version "3.4.9"
