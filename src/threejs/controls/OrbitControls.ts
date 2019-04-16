@@ -1071,7 +1071,11 @@ Object.defineProperties( OrbitControls.prototype, {
 
 } );
 
-export const orbitControls = (camera: THREE.PerspectiveCamera, domElement: HTMLElement, renderer: THREE.WebGLRenderer, scene: THREE.Scene) => {
+export const orbitControls = (camera: THREE.PerspectiveCamera,
+	domElement: HTMLElement,
+	renderer: THREE.WebGLRenderer,
+	scene: THREE.Scene) => {
+
 	const controls: OrbitControls = new OrbitControls(camera, renderer.domElement)
 	controls.update()
 
@@ -1080,6 +1084,7 @@ export const orbitControls = (camera: THREE.PerspectiveCamera, domElement: HTMLE
 		controls.update()
 		renderer.render(scene, camera)
 	}
+
 	animate()
 
 	const resize = () => {
@@ -1088,6 +1093,7 @@ export const orbitControls = (camera: THREE.PerspectiveCamera, domElement: HTMLE
 		camera.aspect = width / height
 		camera.updateProjectionMatrix()
 	}
+	
 	resize()
 
 	window.addEventListener('resize', resize)

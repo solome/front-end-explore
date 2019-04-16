@@ -22,7 +22,6 @@ scene.add(axes)
 
 // Plane
 const planeGeometry = new THREE.PlaneGeometry(60, 20, 1, 1)
-// const planeMaterial = new THREE.MeshBasicMaterial({color: 0xcccccc})
 const planeMaterial = new THREE.MeshLambertMaterial({color: 0xcccccc})
 const plane = new THREE.Mesh(planeGeometry, planeMaterial)
 plane.rotation.x = -.5*Math.PI
