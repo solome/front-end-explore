@@ -3,6 +3,7 @@ const path = require('path')
 const glob = require('glob')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
+const prod = process.NODE_ENV === 'production'
 const resolve = path.resolve
 
 const srcPath = resolve(__dirname, 'src')
@@ -40,13 +41,33 @@ module.exports = {
   entry: entries,
   output: {
     filename: '[name]-[hash:8].js',
+    publicPath: '',
     path: outputPath,
   },
   devServer: { contentBase: outputPath },
-  resolve: { extensions: [ '.ts', '.tsx', '.js', '.jsx' ] },
+  resolve: {
+    // root: path.resolve(__dirname),
+    alias: {
+      '@images': path.resolve(__dirname, 'src/resources/images'),
+    },
+    extensions: [ '.ts', '.tsx', '.js', '.jsx', '.png', '.jpg', '.gif' ],
+  },
   devtool: 'source-map',
   module: {
-    rules: [{ test: /\.tsx?$/, loader: 'ts-loader' }],
+    rules: [
+      { test: /\.tsx?$/, loader: 'ts-loader' },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            fallback: 'file-loader', limit: 2048,
+            name: '[name]-[hash:8].[ext]',
+            outputPath: prod ? '//solome.js.org/front-end-explore/webgl' : '/resources/images',
+          },
+        }],
+      },
+    ],
   },
   plugins: htmls,
   mode: process.env.NODE_ENV ||'development',
