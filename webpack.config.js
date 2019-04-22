@@ -3,7 +3,7 @@ const path = require('path')
 const glob = require('glob')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-const prod = process.NODE_ENV === 'production'
+const prod = process.env.NODE_ENV === 'production'
 const resolve = path.resolve
 
 const srcPath = resolve(__dirname, 'src')
