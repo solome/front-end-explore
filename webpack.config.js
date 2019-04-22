@@ -41,14 +41,14 @@ module.exports = {
   entry: entries,
   output: {
     filename: '[name]-[hash:8].js',
-    publicPath: '',
+    publicPath: prod ? '//solome.js.org/front-end-explore/webgl' : '',
     path: outputPath,
   },
   devServer: { contentBase: outputPath },
   resolve: {
     // root: path.resolve(__dirname),
     alias: {
-      '@images': path.resolve(__dirname, 'src/resources/images'),
+      '@images': resolve(__dirname, 'src/resources/images'),
     },
     extensions: [ '.ts', '.tsx', '.js', '.jsx', '.png', '.jpg', '.gif' ],
   },
@@ -63,7 +63,7 @@ module.exports = {
           options: {
             fallback: 'file-loader', limit: 2048,
             name: '[name]-[hash:8].[ext]',
-            outputPath: prod ? '//solome.js.org/front-end-explore/webgl' : '/resources/images',
+            outputPath: '/resources/images',
           },
         }],
       },
