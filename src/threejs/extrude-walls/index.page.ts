@@ -10,7 +10,7 @@ const camera: THREE.PerspectiveCamera = new THREE.PerspectiveCamera(75, window.i
 
 camera.position.set(0, 0, 35)
 
-const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer()
+const renderer: THREE.WebGLRenderer = new THREE.WebGLRenderer({canvas: document.querySelector('#webgl-canvas')})
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
