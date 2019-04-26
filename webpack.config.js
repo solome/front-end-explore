@@ -1,42 +1,15 @@
-const fs = require('fs')
 const path = require('path')
-const glob = require('glob')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
+
+const parse = require('./webpack/parse')
+const rules = require('./webpack/rules')
+const devServer = require('./webpack/dev-server')
 
 const prod = process.env.NODE_ENV === 'production'
 const resolve = path.resolve
 
-const srcPath = resolve(__dirname, 'src')
 const outputPath = resolve(__dirname, 'webgl')
 
-const accessible = (f) => {
-  try {
-    fs.accessSync.apply(fs, f)
-    return true
-  } catch (e) {
-    return false
-  }
-}
-
-const htmls = []
-
-const parse = c => {
-  const name = c.replace('.page.ts', '')
-  const html = resolve(srcPath, name + '.html')
-  htmls.push(new HtmlWebpackPlugin({ filename: name + '.html', chunks: [name], template: accessible(html) ? html : 'src/html/index.html' }))
-  const res = {}
-  res[name] = resolve(srcPath, c)
-  return res
-}
-
-const entries = glob.sync('**/*.page.ts', { cwd: srcPath })
-  .reduce((a, c) => {
-    const res = parse(c)
-    Object.assign(res, typeof a === 'string' ? parse(a) : a)
-    return res
-  })
-
-console.log('entries', entries)
+const { entries, htmlPlugins } = parse(resolve(__dirname, 'src'))
 
 module.exports = {
   entry: entries,
@@ -45,16 +18,7 @@ module.exports = {
     publicPath: prod ? '//solome.js.org/front-end-explore/webgl' : '',
     path: outputPath,
   },
-  devServer: {
-    contentBase: outputPath,
-    compress: true,
-    inline: true,
-    port: '8081',
-    allowedHosts: [
-      '.tecnet.me',
-      '.js.org',
-    ]
-  },
+  devServer: devServer(outputPath),
   resolve: {
     alias: {
       '@images': resolve(__dirname, 'src/resources/images'),
@@ -64,23 +28,26 @@ module.exports = {
     extensions: [ '.ts', '.tsx', '.js', '.jsx', '.png', '.jpg', '.gif' ],
   },
   devtool: 'source-map',
-  module: {
-    rules: [
-      { test: /\.tsx?$/, loader: 'ts-loader' },
-      {
-        test: /\.(png|jpg|gif)$/,
-        use: [{
-          loader: 'url-loader',
-          options: {
-            fallback: 'file-loader', limit: 2048,
-            name: '[name]-[hash:8].[ext]',
-            outputPath: '/resources/images',
-          },
-        }],
+  module: { rules: rules() },
+  plugins: [].concat(htmlPlugins),
+  optimization: {
+    splitChunks: {
+      chunks: 'async',
+      // chunks: (chunk) => {
+      //   return chunk.name.indexOf('three') !== -1
+      // },
+      cacheGroups: {
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        'react-vendor': {
+          test: (module, chunks) => /react/.test(module.context),
+          priority: 1,
+        },
       },
-    ],
+    },
   },
-  plugins: htmls,
   mode: process.env.NODE_ENV ||'development',
 }
 
