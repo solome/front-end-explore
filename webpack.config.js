@@ -22,8 +22,8 @@ const htmls = []
 
 const parse = c => {
   const name = c.replace('.page.ts', '')
-  const h = resolve(srcPath, name + '.html')
-  htmls.push(new HtmlWebpackPlugin({ filename: name + '.html', chunks: [name], template: accessible(h) ? h : 'src/html/index.html' }))
+  const html = resolve(srcPath, name + '.html')
+  htmls.push(new HtmlWebpackPlugin({ filename: name + '.html', chunks: [name], template: accessible(html) ? html : 'src/html/index.html' }))
   const res = {}
   res[name] = resolve(srcPath, c)
   return res
@@ -36,6 +36,7 @@ const entries = glob.sync('**/*.page.ts', { cwd: srcPath })
     return res
   })
 
+console.log('entries', entries)
 
 module.exports = {
   entry: entries,
@@ -44,11 +45,21 @@ module.exports = {
     publicPath: prod ? '//solome.js.org/front-end-explore/webgl' : '',
     path: outputPath,
   },
-  devServer: { contentBase: outputPath },
+  devServer: {
+    contentBase: outputPath,
+    compress: true,
+    inline: true,
+    port: '8081',
+    allowedHosts: [
+      '.tecnet.me',
+      '.js.org',
+    ]
+  },
   resolve: {
-    // root: path.resolve(__dirname),
     alias: {
       '@images': resolve(__dirname, 'src/resources/images'),
+      '@three/controls': resolve(__dirname, 'src/threejs/controls'),
+      '@three/libs': resolve(__dirname, 'src/threejs/libs'),
     },
     extensions: [ '.ts', '.tsx', '.js', '.jsx', '.png', '.jpg', '.gif' ],
   },

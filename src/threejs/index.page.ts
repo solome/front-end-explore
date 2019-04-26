@@ -68,17 +68,20 @@ interface Controls {
 }
 const controls: Controls = { rotationSpeed: 0.02, bouncingSpeed: 0.04 }
 const datGUI = new dat.GUI()
+
 datGUI.add(controls, 'rotationSpeed', 0, 0.5)
 datGUI.add(controls, 'bouncingSpeed', 0, 0.5)
+
+let bouncingSpeed = 0
 
 const renderScene = () => {
   box.rotation.x += controls.rotationSpeed
   box.rotation.y += controls.rotationSpeed
   box.rotation.z += controls.rotationSpeed
 
-  controls.bouncingSpeed += .04
-  sphere.position.x = 20 + (10*(Math.cos(controls.bouncingSpeed)))
-  sphere.position.y = 2 + (10*Math.abs(Math.sin(controls.bouncingSpeed)))
+  bouncingSpeed += controls.bouncingSpeed
+  sphere.position.x = 20 + (10*(Math.cos(bouncingSpeed)))
+  sphere.position.y = 2 + (10*Math.abs(Math.sin(bouncingSpeed)))
 
   requestAnimationFrame(renderScene)
   renderer.render(scene, camera)

@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import { orbitControls } from '../controls/OrbitControls'
+import { orbitControls } from '@three/controls/OrbitControls'
 import Data_lo024DEgzanMj5BE from './data/lo024DEgzanMj5BE'
 
 const __global__: any = window as any
